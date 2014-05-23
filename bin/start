@@ -1,0 +1,28 @@
+#!/bin/bash
+
+erlang="./otp/bin/erl"
+! [ -f "$erlang" ] && erlang="erl"
+
+# Default to 64 threads
+if [ -z "$THREAD_COUNT" ]
+then
+   THREAD_COUNT="64"
+fi
+
+APP=$1
+shift
+
+$erlang \
+  +K true \
+  +A$THREAD_COUNT \
+  -smp auto \
+  +scl false \
+  +spp true \
+  +swt low \
+  +sbwt long \
+  -pa ebin \
+  -pa deps/*/ebin \
+  -env ERL_LIBS deps \
+  -name $APP@`hostname` \
+  -setcookie $APP \
+  -s $APP $@

@@ -1,0 +1,11 @@
+{application, anvil, [
+  {description, "Erlang port of the anvil client"},
+  {vsn, "0.1.0"},
+  {modules, []},
+  {registered, []},
+  {applications, [
+    kernel,
+    stdlib
+  ]},
+  {env, []}
+]}.
